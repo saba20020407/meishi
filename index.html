@@ -1,0 +1,159 @@
+<html>
+<head>
+  <style>
+    /* Add your own CSS styles here */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .title {
+      text-align: center;
+      font-size: 36px;
+      color: #333;
+    }
+
+    .subtitle {
+      text-align: center;
+      font-size: 24px;
+      color: #666;
+    }
+
+    .wallet {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .wallet button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: #00a0ff;
+      color: #fff;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .wallet button:hover {
+      background-color: #0088cc;
+    }
+
+    .wallet button.disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+
+    .wallet span {
+      margin-left: 10px;
+      font-size: 18px;
+    }
+
+    .mint {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .mint input {
+      width: 100px;
+      height: 40px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      text-align: center;
+      font-size: 18px;
+    }
+
+    .mint input:focus {
+      outline: none;
+    }
+
+    .mint button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: #00a0ff;
+      color: #fff;
+      font-size: 18px;
+      cursor: pointer;      
+    }
+
+    .mint button:hover {
+      background-color: #0088cc;      
+    }
+
+    .mint button.disabled {
+      background-color: #ccc;      
+      cursor: not-allowed;      
+    }
+
+    .mint p {
+      margin-top: 10px;      
+      font-size: 18px;      
+    }
+    
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="title">My Mint Site</h1>
+    <h2 class="subtitle">Mint your own NFTs here</h2>
+    
+    <div class="wallet">
+     <button id="connect-button">Connect Wallet</button>
+     <span id="account-address"></span>
+   </div>
+
+   <div class="mint">
+     <input id="mint-input" type="number" min="1" max="10" value="1">
+     <button id="mint-button">Mint NFTs</button>
+     <p id="mint-message"></p>
+   </div>
+
+ </div>
+
+ <script>
+   // Add your own JavaScript code here
+
+   // Define some constants
+   const connectButton = document.getElementById("connect-button");
+   const accountAddress = document.getElementById("account-address");
+   const mintInput = document.getElementById("mint-input");
+   const mintButton = document.getElementById("mint-button");
+   const mintMessage = document.getElementById("mint-message");
+
+   // Define some variables
+   let web3; // web3 instance
+   let account; // user's wallet address
+   let contract; // smart contract instance
+   let price; // price per NFT in wei
+
+   // Define some functions
+
+   // Initialize the web3 and contract instances
+   async function init() {
+     // Check if the browser supports web3
+     if (window.ethereum) {
+       try {
+         // Request access to the user's accounts
+         await window.ethereum.request({ method: "eth_requestAccounts" });
+         // Create a new web3 instance
+         web3 = new Web3(window.ethereum);
+         // Get the user's account address
+         account = await web3.eth.getAccounts();
+         account = account[0];
+         // Display the account address
+         accountAddress.innerText = account;
+
+         // Create a new contract instance
+         //
