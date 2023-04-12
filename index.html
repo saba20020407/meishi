@@ -1,48 +1,7 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Mint Site</title>
-    <script src="https://cdn.jsdelivr.net/npm/web3@1.5.3/dist/web3.min.js"></script>
-  </head>
-  <body>
-    <h1>Welcome to the Mint Site</h1>
-    <button id="connect-wallet-button">Connect Wallet</button>
-    <h2>NFTs for Sale</h2>
-    <ul id="nft-list"></ul>
-    <h2>Mint NFT</h2>
-    <form id="mint-form">
-      <label for="nft-name">NFT Name:</label>
-      <input type="text" id="nft-name" name="nft-name" required>
-      <label for="nft-price">Price:</label>
-      <input type="number" id="nft-price" name="nft-price" required>
-      <button type="submit" id="mint-button">Mint</button>
-    </form>
-    <script>
-      // Add your own JavaScript code here
-      const connectButton = document.getElementById("connect-wallet-button");
-      const mintButton = document.getElementById("mint-button");
-
-      async function connectWallet() {
-        if (window.ethereum) {
-          try {
-            await window.ethereum.request({ method: "eth_requestAccounts" });
-            console.log("Connected to wallet:", window.ethereum.selectedAddress);
-          } catch (error) {
-            console.log("Failed to connect to wallet:", error);
-          }
-        } else {
-          console.log("No Ethereum interface found");
-        }
-      }
-
-      connectButton.addEventListener("click", connectWallet);
-
-      mintButton.addEventListener("click", function (event) {
-        event.preventDefault();
-        console.log("Minting NFT...");
-        // TODO: Implement NFT minting logic
-      });
-    </script>
-  </body>
-</html>
+<iframe
+    src="https://ipfs.thirdwebcdn.com/ipfs/QmbAgC8YwY36n8H2kuvSWsRisxDZ15QZw3xGZyk9aDvcv7/erc721.html?contract=0xA8b2B9015c2A108A724F36344DFf2E6675D073A7&chain=%7B%22name%22%3A%22Polygon+Mainnet%22%2C%22chain%22%3A%22Polygon%22%2C%22rpc%22%3A%5B%22https%3A%2F%2Fpolygon.rpc.thirdweb.com%2F5a9bc94b87f7cbbbfbbc234bf1e07f0adf5f3cf3012c9f26f9fc9820d64df93a%22%5D%2C%22nativeCurrency%22%3A%7B%22name%22%3A%22MATIC%22%2C%22symbol%22%3A%22MATIC%22%2C%22decimals%22%3A18%7D%2C%22shortName%22%3A%22matic%22%2C%22chainId%22%3A137%2C%22testnet%22%3Afalse%2C%22slug%22%3A%22polygon%22%7D"
+    width="600px"
+    height="600px"
+    style="max-width:100%;"
+    frameborder="0"
+    ></iframe>
